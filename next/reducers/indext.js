@@ -10,17 +10,18 @@ const initialState = {
     }
 };
 
-
-const changeNickname = (data) => {
+export const loginAction = (data) => {
     return {
-        type: 'CHANGE_NICKNAME',
+        type: 'LOG_IN',
         data,
     }
-};
+}
 
-changeNickname('Gownhaeun');
-
-store.dispatch(changeNickname('mighty tak'))
+export const logoutAction = (data) => {
+    return {
+        type: 'LOG_OUT',
+    }
+}
 
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -31,6 +32,15 @@ const rootReducer = (state = initialState, action) => {
                     ...state.user,
                     isLoggedIn: true,
                     name: action.data,
+                },
+            };
+        case 'LOG_OUT':
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    isLoggedIn: false,
+                    name: null,
                 },
             };
     }
