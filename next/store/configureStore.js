@@ -1,14 +1,10 @@
 import { createWrapper } from 'next-redux-wrapper';
 import { createStore } from 'redux';
 
-import reducer from '../reducers';
+import reducer from '../reducers/indext';
 
 const configureStore = () => {
     const store = createStore(reducer);
-    store.dispatch({
-        type: 'CHANGE_NICKNAME',
-        data: 'haeungwon',
-    })
     return store;
 };
 
