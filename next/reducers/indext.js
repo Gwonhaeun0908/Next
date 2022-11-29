@@ -29,6 +29,7 @@ export const logoutAction = (data) => {
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
         case HYDRATE:
+            console.log('HYDRATE');
             return { ...state, ...action.payload };
         case 'LOG_IN':
             return {
