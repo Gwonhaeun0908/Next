@@ -1,3 +1,11 @@
+const dummyUser = {
+    id: 1,
+    nickname: '하은',
+    Posts: [],
+    Followings: [],
+    Followers: [],
+};
+
 export const initialState = {
     isLoggedIn: false,
     user: null,
