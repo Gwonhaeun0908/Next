@@ -4,14 +4,32 @@ import PropTypes from 'prop-types';
 import { RetweetOutlined, HeartTwoTone, HeartOutlined, MessageOutlined, EllipsisOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 import Link from "next/link";
-import { useSelector  } from "react-redux";
-import { Content } from "antd/lib/layout/layout";
+
+import CommentForm from './CommentForm';
+import PostCardContent from "./PostCardContent";
+import PostImages from './PostImages';
+import FollowButton from "./FollowButton";
+
+const CardWrapper = styled.div`
+    margin-bottom: 20px;
+`;
 
 const PostCard = () => {
+    const [commentFormOpened, setCommentFormOpened] = useState(false);
+    const [liked, setLinked] = useState(false);
+
+    const onToggleLike = useCallback(() => {
+        setLinked((prev) => !prev);
+    }, []);
+
+    const onToggleComment = useCallback(() =>{
+        setCommentFormOpened((prev) => !prev);
+    }, []);
+
     return (
         <CardWrapper key={post.id}>
             <Card
-                cover={post.Images[0] && <PostImges images={post.Images} />}
+                cover={post.Images[0] && <PostImages images={post.Images} />}
                 actions={[
                     <RetweetOutlined key="retweet" />,
                     liked
@@ -64,6 +82,16 @@ const PostCard = () => {
             )}
         </CardWrapper>
     );
+};
+
+PostCard.PropTypes = {
+    post: PropTypes.shape({
+        id: PropTypes.number,
+        User: PropTypes.object,
+        content: PropTypes.string,
+        img: PropTypes.string,
+        createAt: PropTypes.object,
+    }),
 };
 
 export default PostCard;
