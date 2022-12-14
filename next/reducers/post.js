@@ -18,7 +18,7 @@ export const initialState = {
                 nickname: 'rabbit',
             },
             content: '배고파',
-        },      {
+        },   {
             User: {
                 nickname: 'cat',
             },
@@ -27,12 +27,13 @@ export const initialState = {
     }],
     imagePaths: [],
     postAdded: false,
-}
+};
 
 const ADD_POST = 'ADD_POST';
+
 export const addPost = {
     type: ADD_POST,
-}
+};
 
 const dummyPost = {
     id: 2,
@@ -45,7 +46,7 @@ const dummyPost = {
     Comments: [],
 };
 
-const reducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST: {
             return {
@@ -61,5 +62,3 @@ const reducer = (state = initialState, action) => {
         }
     }
 };
-
-export default reducer;
