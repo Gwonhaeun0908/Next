@@ -4,11 +4,14 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import reducer from '../reducers/indext';
 
-const configureStore = () => {
+const configureStore = (context) => {
+    console.log(context);
     const middleware = [];
     const enhancer = process.env.NODE_ENV === 'production'
         ? compose(applyMiddleware(...middleware))
-        : composeWithDevTools(applyMiddleware(...middleware))
+        : composeWithDevTools(
+            applyMiddleware(...middleware),
+        );
     const store = createStore(reducer, enhancer);
     return store;
 };
