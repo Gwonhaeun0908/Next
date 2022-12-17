@@ -7,7 +7,7 @@ import AppLayout from "../components/AppLayout";
 
 const Home = () => {
     const { isLoggedIn } = useSelector(state => state.user);
-    const { mainPosts } = useSelector(state => state.user);
+    const { mainPosts } = useSelector(state => state.post);
 
     return (
         <AppLayout>
