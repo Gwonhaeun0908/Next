@@ -4,11 +4,13 @@ import PropTypes from 'prop-types';
 import { RetweetOutlined, HeartTwoTone, HeartOutlined, MessageOutlined, EllipsisOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 import Link from "next/link";
+import { useSelector } from "react-redux";
 
 import CommentForm from './CommentForm';
 import PostCardContent from "./PostCardContent";
 import PostImages from './PostImages';
 import FollowButton from "./FollowButton";
+import post from "../reducers/post";
 
 const CardWrapper = styled.div`
     margin-bottom: 20px;
@@ -16,6 +18,8 @@ const CardWrapper = styled.div`
 
 const PostCard = () => {
     const [commentFormOpened, setCommentFormOpened] = useState(false);
+    const id = useSelector((state) => state.user.me && state.user.me.id);
+
     const [liked, setLinked] = useState(false);
 
     const onToggleLike = useCallback(() => {
@@ -40,9 +44,14 @@ const PostCard = () => {
                         key="ellipsis"
                         content={(
                             <Button.Group>
-                                <Button>신고</Button>
-                                <Button>수정</Button>
-                                <Button danger>삭제</Button>
+                                {id && post.User.id === id
+                                    ? (
+                                        <>
+                                            <Button>수정</Button>
+                                            <Button type="danger">삭제</Button>
+                                        </>
+                                    )
+                                    : <Button>신고</Button>}
                             </Button.Group>
                         )}
                     >
@@ -89,8 +98,9 @@ PostCard.PropTypes = {
         id: PropTypes.number,
         User: PropTypes.object,
         content: PropTypes.string,
-        img: PropTypes.string,
         createAt: PropTypes.object,
+        Comments: PropTypes.arrayOf(PropTypes.any),
+        Images: PropTypes.arrayOf(PropTypes.any),
     }),
 };
 
